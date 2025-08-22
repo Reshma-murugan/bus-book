@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: busbookBackend
+  datasource:
+    url: jdbc:mysql://localhost:3306/busapp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+app:
+  security:
+    jwt:
+      secret: change-me-super-secret-key-for-jwt-token-generation-and-validation
+      expirationMinutes: 30
+  pricing:
+    categoryMultipliers:
+      AC_SEATER: 1.10
+      NONAC_SEATER: 1.00
+      AC_SLEEPER: 1.25
+      NONAC_SLEEPER: 1.10
+
+logging:
+  level:
+    com.example.busbookBackend: DEBUG
+    org.springframework.security: DEBUG
